@@ -5,7 +5,6 @@ essentialsApp.controller( 'NamesController', function(){
     
     vm.addName = () => {
         if( vm.firstNameIn ){
-            console.log( vm.firstNames.indexOf( vm.firstNameIn ) );
             if( vm.firstNames.indexOf( vm.firstNameIn ) < 0 ){
                 vm.firstNames.push( vm.firstNameIn );
             } // end dupe check
@@ -14,7 +13,6 @@ essentialsApp.controller( 'NamesController', function(){
             } //end first name dupe
         } // end first name add
         if( vm.lastNameIn ){
-            console.log( vm.firstNames.indexOf( vm.lastNameIn ) );
             if( vm.lastNames.indexOf( vm.lastNameIn ) < 0 ){
                 vm.lastNames.push( vm.lastNameIn );
             } // end dupe check
@@ -29,4 +27,13 @@ essentialsApp.controller( 'NamesController', function(){
     vm.generateName = () => {
         vm.generatedName = vm.firstNames[ Math.floor( Math.random() * vm.firstNames.length ) ] + ' ' + vm.lastNames[ Math.floor( Math.random() * vm.lastNames.length ) ];
     } // end generateName
+
+    vm.removeName = ( firstName, index ) => {
+        if( firstName ){
+            vm.firstNames.splice( index, 1 );
+        }
+        else{
+            vm.lastNames.splice( index, 1 );
+        }
+    } // end removeName
 }); //end controller
