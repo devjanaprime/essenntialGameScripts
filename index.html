@@ -12,52 +12,55 @@
     <title>Essential Scripts - JS Edition</title>
 </head>
 <body>
-    <main ng-app='essentialsApp'>
-        <section id='dice' ng-controller='DiceController as DC'>
-            <h2>Dice</h2>
-            <p>
-                <input type="number" placeholder="# of dice" ng-model="DC.numDice">d <input type="number" placeholder="sides" ng-model='DC.sides'>
-                <button ng-Click='DC.rollDice()'>Roll</button>
+    <main ng-app="essentialsApp">
+        <h1>Essential Scripts JS</h1>
+        <section id="dice" ng-controller="DiceController as DC">
+            <h2>Dice <button ng-hide="DC.show" ng-click="DC.toggleShow()">Show</button><button ng-show="DC.show" ng-click="DC.toggleShow()">Hide</button></h2>
+            <section ng-show="DC.show">
+                <p>
+                <input type="number" placeholder="# of dice" ng-model="DC.numDice">d
+                <input type="number" placeholder="sides" ng-model='DC.sides'>
+                <button ng-Click='DC.rollDice()'>Roll the Bones</button></p>
                 <p><strong>Total: {{ DC.answer }}</strong></p>
                 <p><input type="checkbox" ng-model="DC.details">Show Details</p>
                 <section ng-show="DC.details">
                     <ul>
-                    <li ng-repeat="roll in DC.rolls">{{ roll.value }}</li> 
+                        <li ng-repeat="roll in DC.rolls">{{ roll.value }}</li> 
                     </ul>
                 </section>
-            </p>
+            </section>
         </section>
-        <section id='names' ng-controller="NamesController as NC">
-            <h2>Names</h2>
-            <section id="generateName">
+        <section id="names" ng-controller="NamesController as NC">
+            <h2>Names <button ng-hide="NC.show" ng-click="NC.toggleShow()">Show</button><button ng-show="NC.show" ng-click="NC.toggleShow()">Hide</button></h2>
+            <section ng-show="NC.show">
                 <h3>Generate Name</h3>
                 <p><button ng-click="NC.generateName()">Generate</button> <strong>{{ NC.generatedName }}</strong></p>
-            </section>
-            <section id="addName">
                 <h3>Add Name</h3>
-                <input type="text" placeholder="First Name" ng-model="NC.firstNameIn">
-                <input type="text" placeholder="Last Name" ng-model="NC.lastNameIn">
-                <button ng-click="NC.addName()">Add</button>
-            </section>
-            <p>Show possible names<input type="checkbox" ng-model="NC.showNames"></p>
-            <section ng-show="NC.showNames">
-                <h3>First Names</h3>
-                <ul id="firstNames">
-                    <li ng-repeat="firstName in NC.firstNames">{{ firstName }} <button ng-click="NC.removeName( true, $index );">Remove</button></li>
-                </ul>
-                <h3>Last Names</h3>
-                <ul id="lastNames">
-                    <li ng-repeat="lastName in NC.lastNames">{{ lastName }} <button ng-click="NC.removeName( false, $index );">Remove</button></li>
-                </ul>
+                <p>
+                    <input type="text" placeholder="First Name" ng-model="NC.firstNameIn">
+                    <input type="text" placeholder="Last Name" ng-model="NC.lastNameIn">
+                    <button ng-click="NC.addName()">Add</button>
+                </p>
+                <p>Show possible names<input type="checkbox" ng-model="NC.showNames"></p>
+                <section ng-show="NC.showNames">
+                    <h3>First Names <button ng-click="NC.emptyNames( true )">Empty</button></h3>
+                    <ul id="firstNames">
+                        <li ng-repeat="firstName in NC.firstNames">{{ firstName }} <button ng-click="NC.removeName( true, $index );">Remove</button></li>
+                    </ul>
+                    <h3>Last Names <button ng-click="NC.emptyNames( false )">Empty</button></h3>
+                    <ul id="lastNames">
+                        <li ng-repeat="lastName in NC.lastNames">{{ lastName }} <button ng-click="NC.removeName( false, $index );">Remove</button></li>
+                    </ul>
+                </section>
             </section>
         </section>
-        <section id='scenarios'>
+        <section id="scenarios">
             <h2>Scenarios</h2>
         </section>
-        <section id='cards'>
+        <section id="cards">
             <h2>Cards</h2>
         </section>
-        <section id='madlibber'>
+        <section id="madlibber">
             <h2>Madlibber</h2>
         </section>
     </main>

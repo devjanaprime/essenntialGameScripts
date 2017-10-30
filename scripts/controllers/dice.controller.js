@@ -10,4 +10,7 @@ essentialsApp.controller( 'DiceController', function(){
             this.answer = this.rolls.sumProperty( 'value' );
         } // end for
     } // end rollDice
+    this.toggleShow = () => {
+        vm.show = !vm.show;
+    } // end toggleShow
 }); //end controller

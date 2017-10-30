@@ -5,35 +5,33 @@ essentialsApp.controller( 'NamesController', function(){
     
     vm.addName = () => {
         if( vm.firstNameIn ){
-            if( vm.firstNames.indexOf( vm.firstNameIn ) < 0 ){
-                vm.firstNames.push( vm.firstNameIn );
-            } // end dupe check
-            else{
-                alert( 'First name not added: duplicate' );
-            } //end first name dupe
+            if( vm.firstNames.indexOf( vm.firstNameIn ) < 0 ) vm.firstNames.push( vm.firstNameIn );
+            else alert( 'First name not added: duplicate' );
         } // end first name add
         if( vm.lastNameIn ){
-            if( vm.lastNames.indexOf( vm.lastNameIn ) < 0 ){
-                vm.lastNames.push( vm.lastNameIn );
-            } // end dupe check
-            else{
-                alert( 'Last name not added: duplicate' );
-            } // end last name dupe
+            if( vm.lastNames.indexOf( vm.lastNameIn ) < 0 ) vm.lastNames.push( vm.lastNameIn );
+            else alert( 'Last name not added: duplicate' );
         } // end last name add
         vm.firstNameIn = '';
         vm.lastNameIn = '';
     } //end addName
 
+    vm.emptyNames = ( first ) => {
+        if( first ) vm.firstNames = [];
+        else vm.lastNames = [];
+    } // end emptyNames
+
     vm.generateName = () => {
-        vm.generatedName = vm.firstNames[ Math.floor( Math.random() * vm.firstNames.length ) ] + ' ' + vm.lastNames[ Math.floor( Math.random() * vm.lastNames.length ) ];
+        if( vm.firstNames.length > 0 && vm.lastNames.length > 0 ) vm.generatedName = vm.firstNames[ Math.floor( Math.random() * vm.firstNames.length ) ] + ' ' + vm.lastNames[ Math.floor( Math.random() * vm.lastNames.length ) ];
+        else vm.generatedName = '';
     } // end generateName
 
     vm.removeName = ( firstName, index ) => {
-        if( firstName ){
-            vm.firstNames.splice( index, 1 );
-        }
-        else{
-            vm.lastNames.splice( index, 1 );
-        }
+        if( firstName ) vm.firstNames.splice( index, 1 );
+        else vm.lastNames.splice( index, 1 );
     } // end removeName
+
+    vm.toggleShow = () => {
+        vm.show = !vm.show;
+    } // end toggleShow
 }); //end controller
