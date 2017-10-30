@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="styles/beach.css">
     <script src="vendors/angular.min.js"></script>
     <script src="scripts/essentials.app.js"></script>
     <script src="scripts/controllers/dice.controller.js"></script>
@@ -17,35 +18,37 @@
             <p>
                 <input type="number" placeholder="# of dice" ng-model="DC.numDice">d <input type="number" placeholder="sides" ng-model='DC.sides'>
                 <button ng-Click='DC.rollDice()'>Roll</button>
-                Show Details: <input type="checkbox" ng-model="DC.details">
-                <ul ng-show="DC.details">
-                   <li ng-repeat="roll in DC.rolls">{{ roll.value }}</li> 
-                </ul>
-                <p>Total: {{ DC.answer }}</p>
+                <p><strong>Total: {{ DC.answer }}</strong></p>
+                <p><input type="checkbox" ng-model="DC.details">Show Details</p>
+                <section ng-show="DC.details">
+                    <ul>
+                    <li ng-repeat="roll in DC.rolls">{{ roll.value }}</li> 
+                    </ul>
+                </section>
             </p>
-            <section id='diceOutput'></section>
         </section>
         <section id='names' ng-controller="NamesController as NC">
             <h2>Names</h2>
             <section id="generateName">
                 <h3>Generate Name</h3>
-                <button ng-click="NC.generateName()">Generate</button><p>{{ NC.generatedName }}</p>
-                Show possible names<input type="checkbox" ng-model="NC.showNames">
-                <section ng-show="NC.showNames">
-                    <h3>First Names</h3>
-                    <ul id="firstNames" >
-                        <li ng-repeat="firstName in NC.firstNames">{{ firstName }}</li>
-                    </ul>
-                    <h3>Last Names</h3>
-                    <ul id="lastNames">
-                        <li ng-repeat="lastName in NC.lastNames">{{ lastName }}</li>
-                    </ul>
-                </section>
+                <p><button ng-click="NC.generateName()">Generate</button> <strong>{{ NC.generatedName }}</strong></p>
             </section>
             <section id="addName">
+                <h3>Add Name</h3>
                 <input type="text" placeholder="First Name" ng-model="NC.firstNameIn">
                 <input type="text" placeholder="Last Name" ng-model="NC.lastNameIn">
-                <button ng-click="NC.addName()">Add Name</button>
+                <button ng-click="NC.addName()">Add</button>
+            </section>
+            <p>Show possible names<input type="checkbox" ng-model="NC.showNames"></p>
+            <section ng-show="NC.showNames">
+                <h3>First Names</h3>
+                <ul id="firstNames">
+                    <li ng-repeat="firstName in NC.firstNames">{{ firstName }}</li>
+                </ul>
+                <h3>Last Names</h3>
+                <ul id="lastNames">
+                    <li ng-repeat="lastName in NC.lastNames">{{ lastName }}</li>
+                </ul>
             </section>
         </section>
         <section id='scenarios'>
