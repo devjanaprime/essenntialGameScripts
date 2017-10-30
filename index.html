@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="vendors/angular.min.js"></script>
+    <script src="scripts/essentials.app.js"></script>
+    <script src="scripts/controllers/dice.controller.js"></script>
+    <script src="scripts/controllers/names.controller.js"></script>
+    <title>Essential Scripts - JS Edition</title>
+</head>
+<body>
+    <main ng-app='essentialsApp'>
+        <section id='dice' ng-controller='DiceController as DC'>
+            <h2>Dice</h2>
+            <p>
+                <input type="number" placeholder="# of dice" ng-model="DC.numDice">d <input type="number" placeholder="sides" ng-model='DC.sides'>
+                <button ng-Click='DC.rollDice()'>Roll</button>
+                Show Details: <input type="checkbox" ng-model="DC.details">
+                <ul ng-show="DC.details">
+                   <li ng-repeat="roll in DC.rolls">{{ roll.value }}</li> 
+                </ul>
+                <p>Total: {{ DC.answer }}</p>
+            </p>
+            <section id='diceOutput'></section>
+        </section>
+        <section id='names' ng-controller="NamesController as NC">
+            <h2>Names</h2>
+            <section id="generateName">
+                <h3>Generate Name</h3>
+                <button ng-click="NC.generateName()">Generate</button><p>{{ NC.generatedName }}</p>
+                Show possible names<input type="checkbox" ng-model="NC.showNames">
+                <section ng-show="NC.showNames">
+                    <h3>First Names</h3>
+                    <ul id="firstNames" >
+                        <li ng-repeat="firstName in NC.firstNames">{{ firstName }}</li>
+                    </ul>
+                    <h3>Last Names</h3>
+                    <ul id="lastNames">
+                        <li ng-repeat="lastName in NC.lastNames">{{ lastName }}</li>
+                    </ul>
+                </section>
+            </section>
+            <section id="addName">
+                <input type="text" placeholder="First Name" ng-model="NC.firstNameIn">
+                <input type="text" placeholder="Last Name" ng-model="NC.lastNameIn">
+                <button ng-click="NC.addName()">Add Name</button>
+            </section>
+        </section>
+        <section id='scenarios'>
+            <h2>Scenarios</h2>
+        </section>
+        <section id='cards'>
+            <h2>Cards</h2>
+        </section>
+        <section id='madlibber'>
+            <h2>Madlibber</h2>
+        </section>
+    </main>
+</body>
+</html>
