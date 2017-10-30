@@ -7,16 +7,24 @@
     <link rel="stylesheet" href="styles/beach.css">
     <script src="vendors/angular.min.js"></script>
     <script src="scripts/essentials.app.js"></script>
+    <script src="scripts/controllers/page.controller.js"></script>
     <script src="scripts/controllers/dice.controller.js"></script>
     <script src="scripts/controllers/names.controller.js"></script>
     <title>Essential Scripts - JS Edition</title>
 </head>
 <body>
-    <main ng-app="essentialsApp">
+    <main ng-app="essentialsApp" ng-controller="PageController as PC">
         <h1>Essential Scripts JS</h1>
-        <section id="dice" ng-controller="DiceController as DC">
-            <h2>Dice <button ng-hide="DC.show" ng-click="DC.toggleShow()">Show</button><button ng-show="DC.show" ng-click="DC.toggleShow()">Hide</button></h2>
-            <section ng-show="DC.show">
+        <section>
+            <button ng-click="PC.toggleView( 0 )">Dice</button>
+            <button ng-click="PC.toggleView( 1 )">Names</button>
+            <button ng-click="PC.toggleView( 2 )">Scenarios</button>
+            <button ng-click="PC.toggleView( 3 )">Cards</button>
+            <button ng-click="PC.toggleView( 4 )">Madlibber</button>
+        </section>
+        <section id="dice" ng-controller="DiceController as DC" ng-if="PC.views[0]">
+            <h2>Dice</h2>
+            <section>
                 <p>
                 <input type="number" placeholder="# of dice" ng-model="DC.numDice">d
                 <input type="number" placeholder="sides" ng-model='DC.sides'>
@@ -30,9 +38,9 @@
                 </section>
             </section>
         </section>
-        <section id="names" ng-controller="NamesController as NC">
-            <h2>Names <button ng-hide="NC.show" ng-click="NC.toggleShow()">Show</button><button ng-show="NC.show" ng-click="NC.toggleShow()">Hide</button></h2>
-            <section ng-show="NC.show">
+        <section id="names" ng-controller="NamesController as NC" ng-if="PC.views[1]">
+            <h2>Names</h2>
+            <section>
                 <h3>Generate Name</h3>
                 <p><button ng-click="NC.generateName()">Generate</button> <strong>{{ NC.generatedName }}</strong></p>
                 <h3>Add Name</h3>
@@ -54,13 +62,13 @@
                 </section>
             </section>
         </section>
-        <section id="scenarios">
+        <section id="scenarios" ng-if="PC.views[2]">
             <h2>Scenarios</h2>
         </section>
-        <section id="cards">
+        <section id="cards" ng-if="PC.views[3]">
             <h2>Cards</h2>
         </section>
-        <section id="madlibber">
+        <section id="madlibber" ng-if="PC.views[4]">
             <h2>Madlibber</h2>
         </section>
     </main>

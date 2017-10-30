@@ -30,8 +30,4 @@ essentialsApp.controller( 'NamesController', function(){
         if( firstName ) vm.firstNames.splice( index, 1 );
         else vm.lastNames.splice( index, 1 );
     } // end removeName
-
-    vm.toggleShow = () => {
-        vm.show = !vm.show;
-    } // end toggleShow
 }); //end controller
