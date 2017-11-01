@@ -1,7 +1,7 @@
-essentialsApp.controller( 'NamesController', function(){
+essentialsApp.controller( 'NamesController', function( $http ){
     let vm = this;
-    vm.firstNames = [ 'Dev', 'Krystal', 'John', 'Phil', 'Reena', 'Anjie', 'Matt', 'Karl', 'Steve' ]; // end firstNames
-    vm.lastNames = [ 'Jana', 'Frauendienst', 'Hirsch', 'Razanauskus', 'Chludzinski', 'Marshall', 'Towns', 'Wiggins', 'Butler', 'Nash' ]; // end lastNames
+    vm.firstNames = []; // end firstNames
+    vm.lastNames = []; // end lastNames
     
     vm.addName = () => {
         if( vm.firstNameIn ){
@@ -26,8 +26,23 @@ essentialsApp.controller( 'NamesController', function(){
         else vm.generatedName = '';
     } // end generateName
 
+    vm.getNamesFromFile = () => {
+        $http.get( './scripts/data/names.json' )
+        .success( function( data ){
+            vm.firstNames = data.firstNames;
+            vm.lastNames = data.lastNames;
+        }) //end success
+        .error( function( data ){
+            console.log( 'unable to load names from json' );
+        }); // end error
+    }
+
     vm.removeName = ( firstName, index ) => {
         if( firstName ) vm.firstNames.splice( index, 1 );
         else vm.lastNames.splice( index, 1 );
     } // end removeName
+
+    // init
+    vm.getNamesFromFile();
+
 }); //end controller

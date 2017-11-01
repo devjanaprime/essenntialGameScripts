@@ -10,6 +10,7 @@
     <script src="scripts/controllers/page.controller.js"></script>
     <script src="scripts/controllers/dice.controller.js"></script>
     <script src="scripts/controllers/names.controller.js"></script>
+    <script src="scripts/controllers/scenarios.controller.js"></script>
     <title>Essential Scripts - JS Edition</title>
 </head>
 <body>
@@ -62,8 +63,37 @@
                 </section>
             </section>
         </section>
-        <section id="scenarios" ng-if="PC.views[2]">
+        <section id="scenarios" ng-controller="ScenariosController as SC" ng-if="PC.views[2]">
             <h2>Scenarios</h2>
+            <section>
+                <h3>Generate Scenario</h3>
+                <p><button ng-click="SC.generateScenario()">Generate</button> <strong>{{ SC.generatedScenario }}</strong></p>
+                <h3>Add Scenario</h3>
+                <p>
+                    <input type="text" placeholder="Setting" ng-model="NC.settingIn">
+                    <input type="text" placeholder="Objective" ng-model="NC.objectiveIn">
+                    <input type="text" placeholder="Antagonist" ng-model="NC.antagonistIn">
+                    <input type="text" placeholder="Complication" ng-model="NC.complicationIn">
+                    <button ng-click="SC.addScenario()">Add</button>
+                </p>
+                <p>Show possible Scenarios<input type="checkbox" ng-model="SC.showScenarios"></p>
+                <section ng-show="SC.showScenarios">
+                    <h3>Settings <button ng-click="SC.emptyScenario( 0 )">Empty</button></h3>
+                    <ul id="settings">
+                        <li ng-repeat="setting in SC.settings">{{ setting }} <button ng-click="SC.removeScenario( 0, $index );">Remove</button></li>
+                    </ul>
+                    <h3>Objectives <button ng-click="SC.emptyScenario( 1 )">Empty</button></h3>
+                    <ul id="objectives">
+                        <li ng-repeat="objective in SC.objectives">{{ objective }} <button ng-click="SC.removeScenario( 1, $index );">Remove</button></li>
+                    </ul>
+                    <ul id="antagonists">
+                        <li ng-repeat="antagonist in SC.antagonists">{{ antagonist }} <button ng-click="SC.removeScenario( 2, $index );">Remove</button></li>
+                    </ul>
+                    <ul id="objectives">
+                        <li ng-repeat="complication in SC.complications">{{ complication }} <button ng-click="SC.removeScenario( 3, $index );">Remove</button></li>
+                    </ul>
+                </section>
+            </section>
         </section>
         <section id="cards" ng-if="PC.views[3]">
             <h2>Cards</h2>
