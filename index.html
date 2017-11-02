@@ -11,6 +11,7 @@
     <script src="scripts/controllers/dice.controller.js"></script>
     <script src="scripts/controllers/names.controller.js"></script>
     <script src="scripts/controllers/scenarios.controller.js"></script>
+    <script src="scripts/controllers/cards.controller.js"></script>
     <title>Essential Scripts - JS Edition</title>
 </head>
 <body>
@@ -50,7 +51,7 @@
                     <input type="text" placeholder="Last Name" ng-model="NC.lastNameIn">
                     <button ng-click="NC.addName()">Add</button>
                 </p>
-                <p>Show possible names<input type="checkbox" ng-model="NC.showNames"></p>
+                <p><input type="checkbox" ng-model="NC.showNames">Show possible names</p>
                 <section ng-show="NC.showNames">
                     <h3>First Names <button ng-click="NC.emptyNames( true )">Empty</button></h3>
                     <ul id="firstNames">
@@ -76,7 +77,7 @@
                     <input type="text" placeholder="Complication" ng-model="NC.complicationIn">
                     <button ng-click="SC.addScenario()">Add</button>
                 </p>
-                <p>Show possible Scenarios<input type="checkbox" ng-model="SC.showScenarios"></p>
+                <p><input type="checkbox" ng-model="SC.showScenarios">Show possible Scenarios</p>
                 <section ng-show="SC.showScenarios">
                     <h3>Settings <button ng-click="SC.emptyScenario( 0 )">Empty</button></h3>
                     <ul id="settings">
@@ -95,8 +96,24 @@
                 </section>
             </section>
         </section>
-        <section id="cards" ng-if="PC.views[3]">
+        <section id="cards" ng-controller="CardsController as CC" ng-if="PC.views[3]">
             <h2>Cards</h2>
+            <section>
+                <section>
+                    <h2>Current Hand</h2>
+                    <p><button ng-click="CC.drawRandom()">Draw Random</button><button ng-click="CC.drawFromEnd( true )">Draw Top</button><button ng-click="CC.drawFromEnd( false )">Draw Bottom</button></p>
+                    <ul>
+                        <li ng-repeat="card in CC.drawnHand">{{ card.display() }} <button ng-click="CC.returnCard( $index )">Return</button></li>
+                    </ul>
+                    <p>Blackjack Total: {{ CC.drawnHandBlackjackTotal }}, <input type="checkbox" ng-model="CC.lowAces" ng-change="CC.calculateBlackjackTotal()">Aces Low</p>
+                </section>
+                <p><input type="checkbox" ng-model="CC.showAll">Show deck <button ng-click="CC.shuffleDeck()">Shuffle</button></p>
+                <section ng-show="CC.showAll">
+                    <ul>
+                        <li ng-repeat="card in CC.deck">{{ card.display() }} <button ng-click='CC.drawCard( $index )'>Draw</button></li>
+                    </ul>
+                </section>
+            </section>
         </section>
         <section id="madlibber" ng-if="PC.views[4]">
             <h2>Madlibber</h2>
