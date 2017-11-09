@@ -5,6 +5,11 @@ essentialsApp.controller( 'ScenariosController', function( $http ){
     vm.antagonists = []; // end antagonists
     vm.complications = []; // end complications
     
+    const SETTINGS = 0;
+    const OBJECTIVES = 1;
+    const ANTAGONISTS = 2;
+    const COMPLICATIONS = 3;
+
     vm.addScenario = () => {
         if( vm.settingsIn ){
             if( vm.settings.indexOf( vm.settingsIn ) < 0 ) vm.settings.push( vm.settingsIn );
@@ -29,10 +34,10 @@ essentialsApp.controller( 'ScenariosController', function( $http ){
     } //end addScanrios
 
     vm.emptyScenario = ( type ) => {
-        if( type === 0 ) vm.settings = [];
-        else if( type === 1 ) vm.objectives = [];
-        else if( type === 2 ) vm.antagonists = [];
-        else if( type === 3 ) vm.complications = [];
+        if( type === SETTINGS ) vm.settings = [];
+        else if( type === OBJECTIVES ) vm.objectives = [];
+        else if( type === ANTAGONISTS ) vm.antagonists = [];
+        else if( type === COMPLICATIONS ) vm.complications = [];
     } // end emptyScenario
 
     vm.generateScenario = () => {
@@ -71,10 +76,10 @@ essentialsApp.controller( 'ScenariosController', function( $http ){
     } // end getDefaultScenarios
 
     vm.removeScenario = ( type, index ) => {
-        if( type === 0 ) vm.settings.splice( index, 1 );
-        else if( type === 1 ) vm.objectives.splice( index, 1 );
-        else if( type === 2 ) vm.antagonists.splice( index, 1 );
-        else if( type === 3 ) vm.complications.splice( index, 1 );
+        if( type === SETTINGS ) vm.settings.splice( index, 1 );
+        else if( type === OBJECTIVES ) vm.objectives.splice( index, 1 );
+        else if( type === ANTAGONISTS ) vm.antagonists.splice( index, 1 );
+        else if( type === COMPLICATIONS ) vm.complications.splice( index, 1 );
     } // end removeScenario
 
     // init

@@ -86,10 +86,12 @@
                     <ul id="objectives">
                         <li ng-repeat="objective in SC.objectives">{{ objective }} <button ng-click="SC.removeScenario( 1, $index );">Remove</button></li>
                     </ul>
+                    <h3>Antagonists <button ng-click="SC.emptyScenario( 2 )">Empty</button></h3>
                     <ul id="antagonists">
                         <li ng-repeat="antagonist in SC.antagonists">{{ antagonist }} <button ng-click="SC.removeScenario( 2, $index );">Remove</button></li>
                     </ul>
-                    <ul id="objectives">
+                    <h3>Complications <button ng-click="SC.emptyScenario( 3 )">Empty</button></h3>
+                    <ul id="complications">
                         <li ng-repeat="complication in SC.complications">{{ complication }} <button ng-click="SC.removeScenario( 3, $index );">Remove</button></li>
                     </ul>
                 </section>
