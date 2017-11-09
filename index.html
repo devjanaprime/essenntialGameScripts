@@ -22,7 +22,6 @@
             <button ng-click="PC.toggleView( 1 )">Names</button>
             <button ng-click="PC.toggleView( 2 )">Scenarios</button>
             <button ng-click="PC.toggleView( 3 )">Cards</button>
-            <button ng-click="PC.toggleView( 4 )">Madlibber</button>
         </section>
         <section id="dice" ng-controller="DiceController as DC" ng-if="PC.views[0]">
             <h2>Dice</h2>
@@ -114,9 +113,6 @@
                     </ul>
                 </section>
             </section>
-        </section>
-        <section id="madlibber" ng-if="PC.views[4]">
-            <h2>Madlibber</h2>
         </section>
     </main>
 </body>
