@@ -26,16 +26,10 @@ essentialsApp.controller( 'NamesController', function( $http ){
         else vm.generatedName = '';
     } // end generateName
 
-    vm.getNamesFromFile = () => {
-        $http.get( './scripts/data/names.json' )
-        .success( function( data ){
-            vm.firstNames = data.firstNames;
-            vm.lastNames = data.lastNames;
-        }) //end success
-        .error( function( data ){
-            console.log( 'unable to load names from json' );
-        }); // end error
-    }
+    vm.getDefaultNames = () => {
+        vm.firstNames = [ 'Dev', 'Krystal', 'John', 'Phil', 'Reena', 'Anjie', 'Matt', 'Karl', 'Jimmy', 'Andrew', 'Steve' ];
+        vm.lastNames = [ 'Jana', 'Frauendienst', 'Hirsch', 'Razanauskus', 'Chludzinski', 'Marshall', 'Towns', 'Wiggins', 'Butler', 'Nash' ];
+    } // end getDefaultNames
 
     vm.removeName = ( firstName, index ) => {
         if( firstName ) vm.firstNames.splice( index, 1 );
@@ -43,6 +37,5 @@ essentialsApp.controller( 'NamesController', function( $http ){
     } // end removeName
 
     // init
-    vm.getNamesFromFile();
-
+    vm.getDefaultNames();
 }); //end controller

@@ -47,18 +47,28 @@ essentialsApp.controller( 'ScenariosController', function( $http ){
         } // empty b/c insufficient input
     } // end generateScenario
 
-    vm.getScenariosFromFile = () => {
-        $http.get( './scripts/data/scenarios.json' )
-        .success( function( data ){
-            vm.settings = data.settings;
-            vm.objectives = data.objectives;
-            vm.antagonists = data.antagonists;
-            vm.complications = data.complications;
-        }) //end success
-        .error( function( data ){
-            console.log( 'unable to load scenarios from json' );
-        }); // end error
-    } // end get scenarios from file
+    vm.getDefaultScenarios = () => {
+        vm.settings = [
+            'You wake up lost in the woods',
+            'Looking down on the town from the tower, you realize what must be done',
+            'Trapped, you suddenly find it hard to breathe'
+        ],
+        vm.objectives = [
+            'You know you have to get to New York',
+            'Someone must deliver the message',
+            'Time is running out to make things right with Donny'
+        ],
+        vm.antagonists = [
+            'You can hear the barking of dogs',
+            'The ogres are eating just beyond the wall',
+            'Hopefully the dolls won\'t wake up and attack again'
+        ],
+        vm.complications = [
+            'You are cold, shivering, and without a weapon',
+            'The spoon is still bent',
+            'Your sword is blunt and your friends are missing'
+        ]
+    } // end getDefaultScenarios
 
     vm.removeScenario = ( type, index ) => {
         if( type === 0 ) vm.settings.splice( index, 1 );
@@ -68,6 +78,6 @@ essentialsApp.controller( 'ScenariosController', function( $http ){
     } // end removeScenario
 
     // init
-    vm.getScenariosFromFile();
+    vm.getDefaultScenarios();
 
 }); //end controller
