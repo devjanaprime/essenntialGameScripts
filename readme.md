@@ -5,7 +5,7 @@ Game Script Essentails - JS edition
 
 Seemed a good "back to basics" exercise to visit this in JS while being a solid example for others.
 
-Tech:
+Technologies used:
 ---
 
 - HTML
